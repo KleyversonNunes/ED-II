@@ -1,5 +1,5 @@
 # Disciplina: Estrutura de Dados II
-**Esse repositório foi criado com a finalidade de guarda códigos fontes das implementações realizadas durante a disciplina de Estrutura de Dados II**  
+**Esse repositório foi criado com a finalidade de guarda códigos fontes das implementações realizadas durante a disciplina de Estrutura de Dados II.**  
 Ao longo da disciplina serão implementadas algumas algumas estruturas clássicas, como:
 - Grafos
     - Direcionados ou Digrafos
