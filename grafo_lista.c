@@ -268,6 +268,6 @@ int main()
     LiberaGrafo(&G1);
     
     getchar();
-    printf("123 testando\n");
+    printf("Apenas testando a conexao do VSCode com o GitHub\n");
     return 0;
 }
