@@ -8,60 +8,60 @@
 #include <stdlib.h>
 
 // Estrutura para o nó de uma lista encadeada
-typedef struct Node {
-    int vertex;           // Vértice adjacente
-    struct Node* next;    // Próximo nó da lista
-} Node;
+typedef struct TipoItem {
+    int vertice;           // Vértice adjacente
+    struct TipoItem* proximo;    // Próximo nó da lista
+}TipoItem;
 
 // Estrutura para o grafo usando listas encadeadas
-typedef struct Graph {
+typedef struct Grafo {
     int numVertices;      // Número de vértices
-    Node** adjacencyList; // Array de ponteiros para listas encadeadas
-} Graph;
+    TipoItem** listaAdj; // Array de ponteiros para listas encadeadas
+} Grafo;
 
 // Função para criar um nó da lista encadeada
-Node* createNode(int vertex) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->vertex = vertex;
-    newNode->next = NULL;
-    return newNode;
+TipoItem* criarItem(int vertice) {
+    TipoItem* novoItem = (TipoItem*)malloc(sizeof(TipoItem));
+    novoItem->vertice = vertice;
+    novoItem->proximo = NULL;
+    return novoItem;
 }
 
 // Função para criar um grafo com um número fixo de vértices
-Graph* createGraph(int numVertices) {
-    Graph* graph = (Graph*)malloc(sizeof(Graph));
-    graph->numVertices = numVertices;
+Grafo* criarGrafo(int numVertices) {
+    Grafo* grafo = (Grafo*)malloc(sizeof(Grafo));
+    grafo->numVertices = numVertices;
 
     // Inicializa o array de listas encadeadas
-    graph->adjacencyList = (Node**)malloc(numVertices * sizeof(Node*));
+    grafo->listaAdj = (TipoItem**)malloc(numVertices * sizeof(TipoItem*));
     for (int i = 0; i < numVertices; i++) {
-        graph->adjacencyList[i] = NULL;
+        grafo->listaAdj[i] = NULL;
     }
 
-    return graph;
+    return grafo;
 }
 
 // Função para adicionar uma aresta ao grafo
-void addEdge(Graph* graph, int src, int dest) {
+void adicionarAresta(Grafo* grafo, int V1, int V2) {
     // Adiciona o destino à lista de adjacência do vértice de origem
-    Node* newNode = createNode(dest);
-    newNode->next = graph->adjacencyList[src];
-    graph->adjacencyList[src] = newNode;
+    TipoItem* novoItem = criarItem(V2);
+    novoItem->proximo = grafo->listaAdj[V1];
+    grafo->listaAdj[V1] = novoItem;
 
     // Para grafos não direcionados, adiciona a origem à lista do destino
-    newNode = createNode(src);
-    newNode->next = graph->adjacencyList[dest];
-    graph->adjacencyList[dest] = newNode;
+    novoItem = criarItem(V1);
+    novoItem->proximo = grafo->listaAdj[V2];
+    grafo->listaAdj[V2] = novoItem;
 }
 
 // Função para imprimir o grafo
-void printGraph(Graph* graph) {
-    for (int i = 0; i < graph->numVertices; i++) {
-        Node* temp = graph->adjacencyList[i];
+void imprimeGrafo(Grafo* grafo) {
+    for (int i = 0; i < grafo->numVertices; i++) {
+        TipoItem* temp = grafo->listaAdj[i];
         printf("Vértice %d: ", i);
         while (temp) {
-            printf("%d -> ", temp->vertex);
-            temp = temp->next;
+            printf("%d -> ", temp->vertice);
+            temp = temp->proximo;
         }
         printf("NULL\n");
     }
@@ -72,19 +72,19 @@ int main() {
     int numVertices = 5;
 
     // Cria um grafo com 5 vértices
-    Graph* graph = createGraph(numVertices);
+    Grafo* grafo = criarGrafo(numVertices);
 
     // Adiciona algumas arestas ao grafo
-    addEdge(graph, 0, 1);
-    addEdge(graph, 0, 4);
-    addEdge(graph, 1, 2);
-    addEdge(graph, 1, 3);
-    addEdge(graph, 1, 4);
-    addEdge(graph, 2, 3);
-    addEdge(graph, 3, 4);
+    adicionarAresta(grafo, 0, 1);
+    adicionarAresta(grafo, 0, 4);
+    adicionarAresta(grafo, 1, 2);
+    adicionarAresta(grafo, 1, 3);
+    adicionarAresta(grafo, 1, 4);
+    adicionarAresta(grafo, 2, 3);
+    adicionarAresta(grafo, 3, 4);
 
     // Imprime o grafo
-    printGraph(graph);
+    imprimeGrafo(grafo);
 
     return 0;
 }
