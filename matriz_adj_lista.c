@@ -1,7 +1,7 @@
 /*
     Aluno: Kleyverson Nunes da Silva
     Matrícula: 202311140004
-    Atividade: Implementação de grafo na forma de lista encadeada
+    Atividade: Implementar uma representação de matriz de adjacências utilizando como base listas encadeadas.
 */
 
 #include <stdio.h>
