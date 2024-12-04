@@ -274,6 +274,5 @@ int main()
     LiberaGrafo(&G1);
     
     getchar();
-    //printf("Apenas testando a conexao do VSCode com o GitHub\n");
     return 0;
 }
