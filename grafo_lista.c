@@ -1,7 +1,7 @@
 /*
     Aluno: Kleyverson Nunes da Silva
     Matrícula: 202311140004
-    Atividade: Implementação de grafo na forma de lista encadeada
+    Atividade: Implemente a representação de grafos por meio de uma lista encadeada
 */
 
 #include <stdio.h>
@@ -87,6 +87,7 @@ short ExisteAresta(TipoValorVertice Vertice1, TipoValorVertice Vertice2, TipoGra
         if(Vertice2 == Aux->Item.Vertice) EncontrouAresta = TRUE;
         Aux = Aux->Prox;
     }
+    return EncontrouAresta;
 }
 
 // Métodos para obter listas de adjacentes
@@ -119,8 +120,11 @@ void Retira(TipoApontador p, TipoLista *Lista, TipoItem *Item)
     }
     q = p->Prox;
     *Item = q->Item;
+    
     p->Prox = q->Prox;
-    if(p->Prox == NULL) Lista->Ultimo = p;
+    if(p->Prox == NULL)
+        Lista->Ultimo = p;
+    
     free(q);
 }
 
@@ -131,13 +135,15 @@ void RetiraAresta(TipoValorVertice *V1, TipoValorVertice *V2, TipoPeso *Peso, Ti
     short EncontrouAresta = FALSE;
     TipoItem x;
     AuxAnterior = Grafo->Adj[*V1].Primeiro;
+    Aux = AuxAnterior->Prox;
+
     while(Aux != NULL && EncontrouAresta == FALSE)
     {
         if(*V2 == Aux->Item.Vertice)
         {
             Retira(AuxAnterior,&Grafo->Adj[*V1],&x);
             Grafo->NumArestas--;
-            EncontrouAresta == TRUE;
+            EncontrouAresta = TRUE;
         }
         AuxAnterior = Aux;
         Aux = Aux->Prox;
@@ -187,7 +193,7 @@ int main()
     TipoApontador Aux;
     TipoGrafo G1;
     TipoValorVertice V1, V2, Adj;
-    TipoPeso Peso;
+    TipoPeso Peso = 1;
     TipoValorVertice NVertices;
     short NArestas;
     short FimListaAdj;
@@ -217,7 +223,7 @@ int main()
     getchar();
     
     printf("Insere V1 -- V2 -- Peso\n");
-    scanf("%d%d%d,&V1,&V2,&Peso");
+    scanf("%d%d%d",&V1,&V2,&Peso);
     getchar();
     if(ExisteAresta(V1,V2,&G1))
         printf("Aresta ja existe\n");
@@ -244,8 +250,8 @@ int main()
         getchar();
     }
     
-    printf("Retiar aresta V1 --- V2:");
-    scanf(" %d%d,&V1,&V2");
+    printf("Retirar aresta V1 -- V2: \n");
+    scanf("%d%d",&V1,&V2);
     getchar();
     
     if(ExisteAresta(V1,V2,&G1))
@@ -268,6 +274,5 @@ int main()
     LiberaGrafo(&G1);
     
     getchar();
-    //printf("Apenas testando a conexao do VSCode com o GitHub\n");
     return 0;
 }
