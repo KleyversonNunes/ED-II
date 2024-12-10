@@ -43,9 +43,9 @@ void dfs()
         vertice_antecessor[i] = -1; // NULL será representado por -1
     }
     tempo = 0;
-    for(int i = 3;i < 7;i++) 
+    for(int i = 0;i < 7;i++) 
         if(estados[i] == 'B')
-            dfs_visit(i);
+            dfs_visit(3);
 }
 
 int main()
@@ -91,8 +91,10 @@ int main()
     // Chamando a função dfs
     dfs();
 
-    printf("   1 2 3 4 5 6 7\n\n");
     // Imprimindo o grafo
+    printf("Representacao do grafo por matriz de adjacencia\n");
+    printf("   1 2 3 4 5 6 7\n\n");
+
     for(a = 0;a < 7;a++)
     {
         printf("%d  ",a+1);
@@ -102,22 +104,24 @@ int main()
     }
 
     // Exibindo os tempos de descobertas
-    printf("\nTempos de descoberta:\n");
-    printf("1 2 3 4 5 6 7\n");
+    printf("\n    ");
     for(a = 0;a < 7;a++)
-        printf("%d ",tempo_descoberta[a]);
+        printf("%2d ",a+1);
+    printf("\n------------------------");
+    
+    printf("\nTD: ");
+    for(a = 0;a < 7;a++)
+        printf("%2d ",tempo_descoberta[a]);
     
     // Exibindo os tempos de finalização
-    printf("\n\nTempos de finalizacao:\n");
-    printf("1 2 3 4 5 6 7\n");
+    printf("\nTF: ");
     for(a = 0;a < 7;a++)
-        printf("%d ",tempo_finalizacao[a]);
+        printf("%2d ",tempo_finalizacao[a]);
 
     // Exibindo os antecessores de cada vértice
-    printf("\n\nVertice antecessor:\n");
-    printf("1 2 3 4 5 6 7\n");
+    printf("\nVA: ");
     for(a = 0;a < 7;a++)
-        printf("%d ",vertice_antecessor[a]+1);
+        printf("%2d ",vertice_antecessor[a]+1);
 
     printf("\n");
 
