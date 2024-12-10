@@ -44,12 +44,8 @@ void dfs()
     }
     tempo = 0;
     for(int i = 3;i < 7;i++) 
-    {
         if(estados[i] == 'B')
-        {
             dfs_visit(i);
-        }
-    }
 }
 
 int main()
