@@ -44,6 +44,7 @@ void bfs()
                 estados[i] = 'C';
                 distancias[i] = distancias[fila[controle_fila]]+1;
                 vertice_antecessor[i] = fila[controle_fila];
+                fila[i+1] = i;
             }
         }
         estados[ver_atual] = 'P';
@@ -57,7 +58,7 @@ int main()
 
     // Setando a matriz com zeros
     for(int a = 0;a < tam;a++)
-        for(int b = 0;b < 7;b++)
+        for(int b = 0;b < tam;b++)
             grafo[a][b] = 0;
 
     // Arestas
@@ -98,6 +99,8 @@ int main()
             printf("%d ",grafo[a][b]);
         printf("\n");
     }
+
+    bfs();
 
     // Exibindo a fila
     printf("\n\nFila: \n");
