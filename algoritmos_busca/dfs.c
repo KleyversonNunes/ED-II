@@ -45,15 +45,12 @@ void dfs()
     tempo = 0;
     for(int i = 0;i < 7;i++) 
         if(estados[i] == 'B')
-            dfs_visit(3);
+            dfs_visit(3); // Vértice de partida
 }
 
 int main()
 {
-    int fila[7];
-    int a = 0; // Controle da fila
-    
-    int distancias[7];
+    int a = 0;
 
     // Setando a matriz com zeros
     for(int a;a < 7;a++)
