@@ -3,7 +3,8 @@
 
 int grafo[8][8];
 int fila[8]; // Recebe os vértices assim que são descobertos
-int controle_fila; // Indica de qual vértice a busca está partindo
+int inicio_fila = 0; // Indica de qual vértice a busca está partindo
+int fim_fila = 0;
 int tam = 8;
 
 char estados[8];
@@ -12,8 +13,7 @@ int vertice_antecessor[8];
     
 void bfs()
 {
-    int i = 0;
-    int ver_inicial = 7;
+    int ver_inicial = 5;
     int ver_atual;
     // Os estados são iniciam todos em branco
     /*
@@ -22,33 +22,31 @@ void bfs()
             Cinza (C) - Descoberta
             Preto (P) - Finalizado
     */
-    for(i;i<8;i++)
+    for(int i=0;i<tam;i++)
     {
         estados[i] = 'B';
         distancias[i] = -1;
-        vertice_antecessor[i] = -1;
+        vertice_antecessor[i] = -1; // Indica inicialmente que todos os valores são NULL
     }
+    fila[fim_fila++] = ver_inicial;
     estados[ver_inicial] = 'C';
     distancias[ver_inicial] = 0;
-    vertice_antecessor[ver_inicial] = -1; //Indica que o vértice não tem antecessor
-    fila[0] = ver_inicial;
-    controle_fila = 0;
+    //vertice_antecessor[ver_inicial] = -1; //Indica que o vértice não tem antecessor
 
-    while(controle_fila < tam)
+    while(inicio_fila < fim_fila)
     {
-        ver_atual = fila[controle_fila];
-        for(i=0;i<tam;i++)
+        ver_atual = fila[inicio_fila++];
+        for(int i=0;i<tam;i++)
         {
-            if(grafo[fila[controle_fila]][i] == 1 && estados[i] == 'B')
+            if(grafo[ver_atual][i] == 1 && estados[i] == 'B')
             {
                 estados[i] = 'C';
-                distancias[i] = distancias[fila[controle_fila]]+1;
-                vertice_antecessor[i] = fila[controle_fila];
-                fila[i+1] = i;
+                distancias[i] = distancias[ver_atual]+1;
+                vertice_antecessor[i] = ver_atual;
+                fila[fim_fila++] = i;
             }
         }
         estados[ver_atual] = 'P';
-        controle_fila++;
     }
 }
 
@@ -104,7 +102,7 @@ int main()
 
     // Exibindo a fila
     printf("\n\nFila: \n");
-    for(a = 0;a < tam;a++)
+    for(a = 7;a >=0;a--)
         printf("%d ",fila[a]);
     
     // Exibindo a distâncias
@@ -115,6 +113,7 @@ int main()
     printf("\n\nAntecessores: \n");
     for(a = 0;a < tam;a++)
         printf("%d ",vertice_antecessor[a]);
+    printf("\n");
 
     return 0;
 }
