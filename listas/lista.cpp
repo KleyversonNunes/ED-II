@@ -8,5 +8,11 @@ void FZListaVazia(TipoLista *Lista)
 {
     Lista->Primeiro = nullptr;
     Lista->Ultimo = Lista->Primeiro;
-    cout << "A lista esta vazia";
+}
+
+int Vazia(TipoLista Lista)
+{   
+    if(Lista.Primeiro == Lista.Ultimo)
+        return TRUE;
+    return FALSE;
 }

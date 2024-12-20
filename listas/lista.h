@@ -1,3 +1,6 @@
+#define TRUE 1
+#define FALSE 0
+
 typedef struct TipoItem
 {
     int Item;
@@ -19,6 +22,7 @@ typedef struct TipoLista
 
 // Assinatura dos métodos
 void FZListaVazia(TipoLista*);
+int Vazia(TipoLista);
 void InserirItemLista(TipoLista*,TipoItem);
 TipoItem RetirarItemLista(TipoLista*,int);
 void ImprimirLista(TipoLista);
