@@ -13,7 +13,7 @@ int vertice_antecessor[8];
     
 void bfs()
 {
-    int ver_inicial = 5;
+    int ver_inicial = 7;
     int ver_atual;
     // Os estados são iniciam todos em branco
     /*
@@ -31,7 +31,6 @@ void bfs()
     fila[fim_fila++] = ver_inicial;
     estados[ver_inicial] = 'C';
     distancias[ver_inicial] = 0;
-    //vertice_antecessor[ver_inicial] = -1; //Indica que o vértice não tem antecessor
 
     while(inicio_fila < fim_fila)
     {
