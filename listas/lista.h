@@ -3,7 +3,7 @@
 
 typedef struct TipoItem
 {
-    int Item;
+    int Valor;
 }TipoItem;
 
 typedef struct TipoCelula *TipoApontador;
@@ -24,5 +24,5 @@ typedef struct TipoLista
 void FZListaVazia(TipoLista*);
 int Vazia(TipoLista);
 void InserirItemLista(TipoLista*,TipoItem);
-TipoItem RetirarItemLista(TipoLista*,int);
+void RetirarItemLista(TipoLista*,TipoItem*,TipoApontador);
 void ImprimirLista(TipoLista);
