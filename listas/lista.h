@@ -3,7 +3,7 @@
 
 typedef struct TipoItem
 {
-    int Item;
+    int Valor;
 }TipoItem;
 
 typedef struct TipoCelula *TipoApontador;
@@ -23,6 +23,7 @@ typedef struct TipoLista
 // Assinatura dos métodos
 void FZListaVazia(TipoLista*);
 int Vazia(TipoLista);
-void InserirItemLista(TipoLista*,TipoItem);
-TipoItem RetirarItemLista(TipoLista*,int);
+//void InserirItemLista(TipoLista*,TipoItem);
+void InserirItemLista(TipoLista*,TipoItem,int);
+void RetirarItemLista(TipoLista*,TipoItem*,TipoApontador);
 void ImprimirLista(TipoLista);
