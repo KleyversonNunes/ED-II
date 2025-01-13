@@ -1,29 +1,25 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef struct TipoItem
+typedef struct
 {
     int Valor;
 }TipoItem;
 
 typedef struct TipoCelula *TipoApontador;
-
 typedef struct TipoCelula
 {
-    TipoApontador Prox;
     TipoItem Item;
+    TipoApontador Prox;
 }TipoCelula;
 
-typedef struct TipoLista
+typedef struct
 {
-    TipoApontador Primeiro;
-    TipoApontador Ultimo;
+    TipoApontador Primeiro, Ultimo;
 }TipoLista;
 
-// Assinatura dos métodos
-void FZListaVazia(TipoLista*);
+void FLVazia(TipoLista *);
 int Vazia(TipoLista);
-//void InserirItemLista(TipoLista*,TipoItem);
-void InserirItemLista(TipoLista*,TipoItem,int);
-void RetirarItemLista(TipoLista*,TipoItem*,TipoApontador);
-void ImprimirLista(TipoLista);
+void Insere(TipoItem,TipoLista *);
+void Retira(TipoApontador,TipoLista *,TipoItem *);
+void Imprime(TipoLista);

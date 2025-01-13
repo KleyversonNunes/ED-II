@@ -6,33 +6,44 @@
 
 int main()
 {
-    TipoLista Chamada;
-    FZListaVazia(&Chamada);
-    cout << "A lista esta vazia: " << Vazia(Chamada) << endl;
+    TipoLista Numeros;
+    FLVazia(&Numeros);
+    cout << "A lista esta vazia: " << Vazia(Numeros) << endl;
 
     // Criando items
-    TipoItem i1, i2, i3;
+    TipoItem i1, i2, i3, i4, i5;
     i1.Valor = 11;
     i2.Valor = 22;
     i3.Valor = 33;
+    i4.Valor = 44;
+    i5.Valor = 55;
+
 
     // Adicionando items
-    InserirItemLista(&Chamada,i1);
-    InserirItemLista(&Chamada,i2);
-    InserirItemLista(&Chamada,i3);
+    Insere(i1,&Numeros);
+    Insere(i2,&Numeros);
+    Insere(i3,&Numeros);
 
     // Exibindo a lista
-    ImprimirLista(Chamada);
+    Imprime(Numeros);
 
     // Retirando um elemento
-    TipoApontador pri = Chamada.Primeiro->Prox;
+    TipoApontador p = Numeros.Primeiro->Prox;
     TipoItem retirado;
 
-    RetirarItemLista(&Chamada,&retirado,pri);
+    Retira(p,&Numeros,&retirado);
 
     // Exibindo a lista
     cout << endl;
-    ImprimirLista(Chamada);
+    Imprime(Numeros);
+
+    // Adicionando items
+    Insere(i4,&Numeros);
+    Insere(i5,&Numeros);
+
+    // Exibindo a lista
+    cout << endl;
+    Imprime(Numeros);
 
     return 0;
 }
