@@ -1,6 +1,7 @@
 #include "./lista.h"
 #include <stdlib.h>
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -13,10 +14,10 @@ void FLVazia(TipoLista *Lista)
 
 int Vazia(TipoLista Lista)
 {
-    return (Lista.Primeiro == Lista.Ultimo);
+    return Lista.Primeiro == Lista.Ultimo;
 }
 
-void Insere(TipoItem x,TipoLista *Lista)
+void Insere(TipoItem x, TipoLista *Lista)
 {
     Lista->Ultimo->Prox = (TipoApontador)malloc(sizeof(TipoCelula));
     Lista->Ultimo = Lista->Ultimo->Prox;
@@ -24,15 +25,16 @@ void Insere(TipoItem x,TipoLista *Lista)
     Lista->Ultimo->Prox = NULL;
 }
 
-void Retira(TipoApontador p,TipoLista *Lista,TipoItem *Item)
+void Retira(TipoApontador p, TipoLista *Lista, TipoItem *Item)
 {
     TipoApontador q;
     if(Vazia(*Lista) || p == NULL || p->Prox == NULL)
     {
-        cout << "Erro: Lista vazia ou posicao nao existe\n";
+        printf("Erro: Lista vazia ou posicao nao existe\n");
         return;
     }
     q = p->Prox;
+    *Item = q->Item;
     p->Prox = q->Prox;
     if(p->Prox == NULL)
         Lista->Ultimo = p;

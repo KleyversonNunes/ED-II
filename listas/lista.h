@@ -1,9 +1,16 @@
-typedef struct
+#include <cstring>
+
+using namespace std;
+
+typedef struct 
 {
-    int Valor;
+    char Valor[100];
+    //std::string Valor;
+    //int Valor;
 }TipoItem;
 
 typedef struct TipoCelula *TipoApontador;
+
 typedef struct TipoCelula
 {
     TipoItem Item;
@@ -17,6 +24,6 @@ typedef struct
 
 void FLVazia(TipoLista *);
 int Vazia(TipoLista);
-void Insere(TipoItem,TipoLista *);
-void Retira(TipoApontador,TipoLista *,TipoItem *);
+void Insere(TipoItem, TipoLista *);
+void Retira(TipoApontador, TipoLista *, TipoItem *);
 void Imprime(TipoLista);
