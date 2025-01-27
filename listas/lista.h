@@ -1,11 +1,9 @@
-#include <cstring>
+#include <string>
 
-using namespace std;
-
-typedef struct 
+typedef struct TipoItem
 {
-    char Valor[100];
-    //std::string Valor;
+    //char Valor[100];
+    std::string Valor;
     //int Valor;
 }TipoItem;
 
