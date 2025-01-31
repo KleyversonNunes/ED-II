@@ -14,10 +14,10 @@ Grafo* CriarGrafo(int vert)
     Grafo* grafo = new Grafo;
     grafo->numVertices = vert;
 
-    grafo->listaAdj = new TipoApontador;
+    grafo->listaAdj = new TipoApontador[vert];
 
     for(int i = 0;i < vert;i++)
-        grafo->listaAdj[i] = NULL;
+        grafo->listaAdj[i] = nullptr;
     
     return grafo;
 }
@@ -30,9 +30,9 @@ void AdicionarAresta(Grafo *grafo,int origem, int destino)
     grafo->listaAdj[origem] = NovoNo;
 
     // Adiciona a aresta de destino para origem (se o grafo for não direcionado)
-    NovoNo = CriarNo(origem);
+    /*NovoNo = CriarNo(origem);
     NovoNo->Proximo = grafo->listaAdj[destino];
-    grafo->listaAdj[destino] = NovoNo;
+    grafo->listaAdj[destino] = NovoNo;*/
 }
 
 void Imprime(Grafo *grafo)
