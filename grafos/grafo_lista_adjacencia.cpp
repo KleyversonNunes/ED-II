@@ -1,51 +1,86 @@
+#include "./grafo_lista_adjacencia.h"
 #include <iostream>
-#include "./grafo_lista_adjacencia.h"\
 
-TipoApontador CriarNo(int vert)
+using namespace std;
+
+TipoApontador CriarVertice(int Vertice)
 {
-    TipoApontador novo = new no;
-    novo->Vertice = vert;
+    TipoApontador novo = new TipoVertice;
+    novo->Vertice = Vertice;
     novo->Proximo = nullptr;
     return novo;
 }
 
-Grafo* CriarGrafo(int vert)
+TipoGrafo *CriarGrafo(int numVert)
 {
-    Grafo* grafo = new Grafo;
-    grafo->numVertices = vert;
+    TipoGrafo *Grafo = new TipoGrafo;
+    Grafo->numVertices = numVert;
+    Grafo->ListaAdj = new TipoApontador[numVert];
 
-    grafo->listaAdj = new TipoApontador[vert];
-
-    for(int i = 0;i < vert;i++)
-        grafo->listaAdj[i] = nullptr;
+    for(int i = 0;i < numVert;i++)
+        Grafo->ListaAdj[i] = nullptr;
     
-    return grafo;
+    return Grafo;
 }
 
-void AdicionarAresta(Grafo *grafo,int origem, int destino)
+int VerificaAresta(TipoGrafo *Grafo,int origem,int destino)
 {
-    // Adiciona a aresta de origem para destino
-    TipoApontador NovoNo = CriarNo(destino);
-    NovoNo->Proximo = grafo->listaAdj[origem];
-    grafo->listaAdj[origem] = NovoNo;
-
-    // Adiciona a aresta de destino para origem (se o grafo for não direcionado)
-    /*NovoNo = CriarNo(origem);
-    NovoNo->Proximo = grafo->listaAdj[destino];
-    grafo->listaAdj[destino] = NovoNo;*/
-}
-
-void Imprime(Grafo *grafo)
-{
-    for(int i = 0;i < grafo->numVertices;i++)
+    TipoApontador Aux = Grafo->ListaAdj[origem];
+    while(Aux != nullptr)
     {
-        TipoApontador Aux = grafo->listaAdj[i];
-        std::cout << "\nLista de adjacencia do vertice " << i << std::endl;
-        while(Aux)
+        if(Aux->Vertice == destino)
+            return 1;
+        Aux = Aux->Proximo;
+    }
+    return 0;
+}
+
+void AdicionarAresta(TipoGrafo *Grafo,int origem,int destino)
+{
+    if(VerificaAresta(Grafo,origem,destino) == 0)
+    {
+        TipoApontador novo = CriarVertice(destino);
+        novo->Proximo = Grafo->ListaAdj[origem];
+        Grafo->ListaAdj[origem] = novo;
+    }
+    
+    if(VerificaAresta(Grafo,destino,origem) == 0)
+    {
+        TipoApontador novo2 = CriarVertice(origem);
+        novo2->Proximo = Grafo->ListaAdj[destino];
+        Grafo->ListaAdj[destino] = novo2;
+    }
+}
+
+void RetiraAresta(TipoGrafo *Grafo,int origem,int destino)
+{
+    if(VerificaAresta(Grafo,origem,destino) == 1)
+    {
+        TipoApontador Aux = Grafo->ListaAdj[origem];
+        while(Aux->Proximo->Vertice != destino)
+            Aux->Proximo;
+        TipoApontador q = Aux->Proximo;
+        Aux->Proximo = q->Proximo;
+        delete q;
+    }
+    else
+        cout << "Aresta nao existe!\n\n";
+
+    return;
+}
+
+void Imprime(TipoGrafo *Grafo)
+{
+    TipoApontador Aux;
+    for(int i = 0;i < Grafo->numVertices;i++)
+    {
+        Aux = Grafo->ListaAdj[i];
+        cout << "Vertice " << i << ":" << endl;
+        while(Aux != nullptr)
         {
-            std::cout << " -> " << Aux->Vertice;
+            cout << " -> " << Aux->Vertice;
             Aux = Aux->Proximo;
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 }

@@ -1,21 +1,20 @@
-#include <iostream>
+typedef struct TipoVertice *TipoApontador;
 
-typedef struct no *TipoApontador;
-
-typedef struct no
+typedef struct TipoVertice
 {
     int Vertice;
     TipoApontador Proximo;
-}no;
+}TipoVertice;
 
-typedef struct Grafo
+typedef struct TipoGrafo
 {
     int numVertices;
-    TipoApontador *listaAdj;
-}Grafo;
+    TipoApontador *ListaAdj;
+}TipoGrafo;
 
-// Métodos
-TipoApontador CriarNo(int);
-Grafo* CriarGrafo(int);
-void AdicionarAresta(Grafo *,int,int);
-void Imprime(Grafo *);
+TipoApontador CriarVertice(int);
+TipoGrafo *CriarGrafo(int);
+int VerificaAresta(TipoGrafo *,int,int);
+void AdicionarAresta(TipoGrafo *,int,int);
+void RetiraAresta(TipoGrafo *,int,int);
+void Imprime(TipoGrafo *);
