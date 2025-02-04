@@ -3,7 +3,8 @@
 
 int main()
 {
-    int vertices = 5;
+    // Criando um grafo com sete vértices
+    TipoGrafo *Grafo = CriarGrafo(4);
 
     // Inserindo as arestas
     AdicionarAresta(Grafo,0,1);
@@ -17,17 +18,34 @@ int main()
     AdicionarAresta(Grafo,3,0);
     AdicionarAresta(Grafo,3,1);
 
-    // Adicionando as arestas
-    AdicionarAresta(grafo,0,1);
-    AdicionarAresta(grafo,0,4);
-    AdicionarAresta(grafo,1,2);
-    AdicionarAresta(grafo,1,3);
-    AdicionarAresta(grafo,1,4);
-    AdicionarAresta(grafo,2,3);
-    AdicionarAresta(grafo,3,4);
+    /*
+    AdicionarAresta(Grafo,3,0);
+    AdicionarAresta(Grafo,3,1);
+    AdicionarAresta(Grafo,3,3);
+    AdicionarAresta(Grafo,3,6);
+    AdicionarAresta(Grafo,4,1);
+    AdicionarAresta(Grafo,4,3);
+    AdicionarAresta(Grafo,5,1);
+    AdicionarAresta(Grafo,5,2);
+    AdicionarAresta(Grafo,6,3);
+    AdicionarAresta(Grafo,6,4);
+    AdicionarAresta(Grafo,6,5);
+    AdicionarAresta(Grafo,6,6);
+    */
 
-    // Exibindo o grafo
-    Imprime(grafo);
-    
+
+    // Imprimindo o grafo
+    Imprime(Grafo);
+
+    std::cout << std::endl;
+    RetiraAresta(Grafo,0,2);
+    RetiraAresta(Grafo,1,0);
+    RetiraAresta(Grafo,3,2);
+    Imprime(Grafo);
+
+    //int res = VerificaVertice(Grafo,1,4);
+    //std::cout << Grafo->ListaAdj[0]->Proximo->Vertice << std::endl;
+    //std::cout << VerificaVertice(Grafo,1,2) << std::endl;
+
     return 0;
 }
