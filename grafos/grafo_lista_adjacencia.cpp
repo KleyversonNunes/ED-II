@@ -1,28 +1,30 @@
+#include "./grafo_lista_adjacencia.h"
 #include <iostream>
-#include "./grafo_lista_adjacencia.h"\
 
-TipoApontador CriarNo(int vert)
+using namespace std;
+
+TipoApontador CriarVertice(int Vertice)
 {
-    TipoApontador novo = new no;
-    novo->Vertice = vert;
+    TipoApontador novo = new TipoVertice;
+    novo->Vertice = Vertice;
     novo->Proximo = nullptr;
     return novo;
 }
 
-Grafo* CriarGrafo(int vert)
+TipoGrafo *CriarGrafo(int numVert)
 {
     Grafo* grafo = new Grafo;
     grafo->numVertices = vert;
 
-    grafo->listaAdj = new TipoApontador[vert];
+    grafo->listaAdj = new TipoApontador;
 
     for(int i = 0;i < vert;i++)
-        grafo->listaAdj[i] = nullptr;
+        grafo->listaAdj[i] = NULL;
     
-    return grafo;
+    return Grafo;
 }
 
-void AdicionarAresta(Grafo *grafo,int origem, int destino)
+int VerificaAresta(TipoGrafo *Grafo,int origem,int destino)
 {
     // Adiciona a aresta de origem para destino
     TipoApontador NovoNo = CriarNo(destino);
@@ -30,26 +32,23 @@ void AdicionarAresta(Grafo *grafo,int origem, int destino)
     grafo->listaAdj[origem] = NovoNo;
 
     // Adiciona a aresta de destino para origem (se o grafo for não direcionado)
-    //TipoApontador 
-    //NovoNo = CriarNo(origem);
-    //NovoNo->Proximo = grafo->listaAdj[destino];
-    //grafo->listaAdj[destino] = NovoNo;
-    
+    NovoNo = CriarNo(origem);
+    NovoNo->Proximo = grafo->listaAdj[destino];
+    grafo->listaAdj[destino] = NovoNo;
 }
 
-void Imprime(Grafo *grafo)
+void RetiraAresta(TipoGrafo *Grafo,int origem,int destino)
 {
-    TipoApontador Aux;
     for(int i = 0;i < grafo->numVertices;i++)
     {
-        Aux = grafo->listaAdj[i];
+        TipoApontador Aux = grafo->listaAdj[i];
         std::cout << "\nLista de adjacencia do vertice " << i << std::endl;
         while(Aux)
         {
-            std::cout << " -> " << Aux->Vertice;
+            cout << " -> " << Aux->Vertice;
             Aux = Aux->Proximo;
         }
-        std::cout << std::endl;
+        cout << endl;
     }
     return;
 }
