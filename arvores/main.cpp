@@ -65,8 +65,8 @@ int main()
     }
 
     cout << raiz->Valor << endl;
-    cout << raiz->arv_dir->arv_esd->arv_esd->Valor << endl;
-    cout << raiz->arv_esd->arv_esd->arv_esd->Valor << endl;
+    cout << raiz->arv_dir->arv_esq->arv_esq->Valor << endl;
+    cout << raiz->arv_esq->arv_esq->arv_esq->Valor << endl;
 
     // Percurso em pre-ordem
     cout << "Pre-ordem -> ";

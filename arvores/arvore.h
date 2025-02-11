@@ -3,7 +3,7 @@ typedef struct TipoNo *TipoApontador;
 typedef struct TipoNo
 {
     int Valor;
-    TipoApontador arv_esd;
+    TipoApontador arv_esq;
     TipoApontador arv_dir; 
 }TipoNo;
 
