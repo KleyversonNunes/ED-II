@@ -8,3 +8,6 @@ typedef struct TipoNo
 }TipoNo;
 
 TipoApontador criarNo(int);
+
+int buscarNo(TipoApontador,int);
+void inserirNo(TipoApontador,TipoApontador);
