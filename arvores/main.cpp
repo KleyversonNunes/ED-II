@@ -50,10 +50,10 @@ int main()
     inserirNo(raiz,criarNo(22));
     */
 
-    int nos[10] = {10,15,12,8,9,6,5,11,17,3};
+    int nos[14] = {10,15,12,8,9,6,5,11,18,3,16,20,23,17};
     TipoApontador raiz = new TipoNo;;
 
-    for(int i = 0;i < 10;i++)
+    for(int i = 0;i < 14;i++)
     {
         if(i == 0)
         {
@@ -63,10 +63,6 @@ int main()
         else
             inserirNo(raiz,criarNo(nos[i]));
     }
-
-    cout << raiz->Valor << endl;
-    cout << raiz->arv_dir->arv_esq->arv_esq->Valor << endl;
-    cout << raiz->arv_esq->arv_esq->arv_esq->Valor << endl;
 
     // Percurso em pre-ordem
     cout << "Pre-ordem -> ";
@@ -81,6 +77,19 @@ int main()
     // Percurso em pos-ordem
     cout << "Pos-ordem -> ";
     pos_ordem(raiz);
+    cout << endl;
+
+    //retirarNo(raiz,3);
+    //retirarNo(raiz,4);
+    //retirarNo(raiz,12);
+    retirarNo(&raiz,8);
+    retirarNo(&raiz,10);
+    retirarNo(&raiz,18);
+    //retirarNo(raiz,17);
+
+    // Percurso em pre-ordem
+    cout << "Pre-ordem -> ";
+    pre_ordem(raiz);
     cout << endl;
 
     return 0;

@@ -9,8 +9,10 @@ typedef struct TipoNo
 
 TipoApontador criarNo(int);
 
-int buscarNo(TipoApontador,int);
+TipoApontador buscarNo(TipoApontador,int);
+TipoApontador noAnterior(TipoApontador,int);
 void inserirNo(TipoApontador,TipoApontador);
+void retirarNo(TipoApontador *,int);
 
 // Métodos de percurso
 void pre_ordem(TipoApontador);
