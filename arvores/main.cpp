@@ -1,59 +1,26 @@
+/*
+    Disciplina: Estruturas de Dados II
+    Aluno: Kleyverson Nunes da Silva
+    Matricula: 202311140004
+
+    Execute, no terminal para compilar: g++ main.cpp arvore.cpp -o arvore
+*/
+
 #include "./arvore.h"
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main()
 {
-    /*
-    TipoApontador raiz = criarNo(10);
-
-    // Montando a árvore
-    TipoApontador no8 = criarNo(8);
-    raiz->arv_esd = no8;
-
-    TipoApontador no15 = criarNo(15);
-    raiz->arv_dir = no15;
-
-    TipoApontador no6 = criarNo(6);
-    TipoApontador no9 = criarNo(9);
-    no8->arv_esd = no6;
-    no8->arv_dir = no9;
-
-    TipoApontador no3 = criarNo(3);
-    no6->arv_esd = no3;
-
-    TipoApontador no12 = criarNo(12);
-    TipoApontador no17 = criarNo(17);
-    no15->arv_esd = no12;
-    no15->arv_dir = no17;
-
-    TipoApontador no11 = criarNo(11);
-    no12->arv_esd = no11;
-
-    // Buscando um nó
-    cout << buscarNo(raiz,10) << endl;
-    cout << buscarNo(raiz,12) << endl;
-    cout << buscarNo(raiz,4) << endl;
-
-    // Inserindo um no
-    inserirNo(raiz,criarNo(5));
-    cout << buscarNo(raiz,5) << endl;
-
-    cout << raiz->arv_esd->arv_esd->arv_esd->arv_dir->Valor << endl;
-
-    inserirNo(raiz,criarNo(2));
-    cout << buscarNo(raiz,2) << endl;
-    cout << raiz->arv_esd->arv_esd->arv_esd->arv_esd->Valor << endl;
-
-    inserirNo(raiz,criarNo(11));
-    inserirNo(raiz,criarNo(17));
-    inserirNo(raiz,criarNo(22));
-    */
-
-    int nos[14] = {10,15,12,8,9,6,5,11,18,3,16,20,23,17};
+    int nost[15] = {10,15,13,8,9,6,5,11,12,18,3,16,20,23,17};
+    std::vector<int> nos = {10,15,13,8,9,6,5,11,12,18,3,16,20,23,17};
+    cout << "Espaco ocupado por um inteiro: " << sizeof(nos[0]) << endl;
+    cout << "Espaco ocupado pelo array: " << sizeof(nost) << endl;
+    cout << "Tamanho do array: " << sizeof(nost)/sizeof(nos[0]) << endl;
     TipoApontador raiz = new TipoNo;;
 
-    for(int i = 0;i < 14;i++)
+    for(int i = 0;i < nos.size();i++)
     {
         if(i == 0)
         {
@@ -79,18 +46,32 @@ int main()
     pos_ordem(raiz);
     cout << endl;
 
-    //retirarNo(raiz,3);
-    //retirarNo(raiz,4);
-    //retirarNo(raiz,12);
     retirarNo(&raiz,8);
     retirarNo(&raiz,10);
     retirarNo(&raiz,18);
-    //retirarNo(raiz,17);
+    retirarNo(&raiz,3);
+    retirarNo(&raiz,16);
+    retirarNo(&raiz,6);
 
     // Percurso em pre-ordem
-    cout << "Pre-ordem -> ";
+    cout << "\nApos as remocoes\nPre-ordem -> ";
     pre_ordem(raiz);
     cout << endl;
+
+    inserirNo(raiz,criarNo(7));
+    inserirNo(raiz,criarNo(10));
+    inserirNo(raiz,criarNo(14));
+    inserirNo(raiz,criarNo(16));
+    inserirNo(raiz,criarNo(19));
+    inserirNo(raiz,criarNo(22));
+    
+
+    cout << "\nApos as insercoes\nPre-ordem -> ";
+    pre_ordem(raiz);
+    cout << endl;
+
+    TipoApontador no17 = buscarNo(raiz,17);
+    cout << "\n"<< no17->arv_esq->Valor << " <-- " << no17->Valor << " --> " << no17->arv_dir->Valor << endl;
 
     return 0;
 }
