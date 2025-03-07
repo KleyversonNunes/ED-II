@@ -9,7 +9,9 @@ int main()
 {
     TipoApontador raiz;
     //vector<int> lista = {10,15,13,8,9,6,5,11,12,18,3,16,20,23,17};
-    vector<int> lista = {10,15,8,9,6,5,18,3,20,23};
+    vector<int> lista = {10,15,13,14,11,12,8,9,6,5,18,16,17,3,20,23};
+    //vector<int> lista = {10,15,12,14,11,13,8,9,6,5,18,16,17,3,20,23};
+    //vector<int> lista = {10,7,4,8,15,12,18};
 
     for(int i = 0;i < lista.size(); i++)
     {
@@ -60,7 +62,8 @@ int main()
     */
 
     removerNo(&raiz,10);
-    cout << "Removendo a raiz: ";
+    //cout << "Removendo a raiz: ";
+    cout << "Removendo o 10: ";
     pre_ordem(raiz);
     cout << endl;
 
