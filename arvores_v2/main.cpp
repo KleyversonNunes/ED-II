@@ -61,9 +61,9 @@ int main()
     cout << endl;
     */
 
-    removerNo(&raiz,10);
+    removerNo(&raiz,8);
     //cout << "Removendo a raiz: ";
-    cout << "Removendo o 10: ";
+    cout << "Removendo o 8: ";
     pre_ordem(raiz);
     cout << endl;
 

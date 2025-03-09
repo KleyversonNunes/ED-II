@@ -60,11 +60,13 @@ void inserirNo(TipoApontador novo,TipoApontador raiz)
 
 void removerNo(TipoApontador *raiz,int no)
 {
-    TipoApontador no_rm = buscarNo(*raiz,no);
-    if(!no_rm)
-        cout << "O no nao existi!" << endl;
+    if(!buscarNo(*raiz,no)){
+        cout << "O no nao existe!" << endl;
+        return;
+    }
     else
     {
+        TipoApontador no_rm = buscarNo(*raiz,no);
         // Caso 1 - Nó sem filhos
         if(!no_rm->subArvEsq && !no_rm->subArvDir)
         {
@@ -77,43 +79,28 @@ void removerNo(TipoApontador *raiz,int no)
                 else
                     no_rm->noPai->subArvDir = nullptr;
             delete no_rm;
+            return;
         }
-        // Caso 2.A - Nó com somente um filho, a esquerda
-        else if(no_rm->subArvEsq && !no_rm->subArvDir)
+        // Caso 2 - Nó com somente um filho
+        else if(!no_rm->subArvEsq || !no_rm->subArvDir)
         {
+            TipoApontador noFilho = (no_rm->subArvEsq) ? no_rm->subArvEsq : no_rm->subArvDir;
             // Quando no_rm for a raiz
             if(no_rm == *raiz)
             {
-                *raiz = no_rm->subArvEsq;
+                *raiz = noFilho;
                 (*raiz)->noPai = nullptr;
             }
             else
             {
                 if(no_rm->Valor < no_rm->noPai->Valor)
-                    no_rm->noPai->subArvEsq = no_rm->subArvEsq;
+                    no_rm->noPai->subArvEsq = noFilho;
                 else
-                    no_rm->noPai->subArvDir = no_rm->subArvEsq;
-                no_rm->subArvEsq->noPai = no_rm->noPai;
-            }
-            delete no_rm;   
-        }
-        // Caso 2.B - Nó com somente um filho, a direita
-        else if(!no_rm->subArvEsq && no_rm->subArvDir)
-        {
-            if(no_rm == *raiz)
-            {
-                *raiz = no_rm->subArvDir;
-                (*raiz)->noPai = nullptr;
-            }
-            else
-            {
-                if(no_rm->Valor < no_rm->noPai->Valor)
-                    no_rm->noPai->subArvEsq = no_rm->subArvDir;
-                else
-                    no_rm->noPai->subArvDir = no_rm->subArvDir;
-                no_rm->subArvDir->noPai = no_rm->noPai;
+                    no_rm->noPai->subArvDir = noFilho;
+                noFilho->noPai = no_rm->noPai;
             }
             delete no_rm;
+            return;
         }
         // Caso 3 - Nó com dois filhos
         else
@@ -122,45 +109,29 @@ void removerNo(TipoApontador *raiz,int no)
             // Encontrar o nó mais a esquerda
             while(no_esc->subArvEsq)
                 no_esc = no_esc->subArvEsq;
-            //cout << "No mais a esq: " << no_esc->Valor << endl;
+            
+            no_rm->subArvEsq->noPai = no_esc;
+            no_esc->subArvEsq = no_rm->subArvEsq;
+            if(no_esc != no_rm->subArvDir)
+            {
+                if(no_esc->subArvDir)
+                    no_esc->subArvDir->noPai = no_esc->noPai;
+                no_esc->noPai->subArvEsq = no_esc->subArvDir;
+                no_rm->subArvDir->noPai = no_esc;
+                no_esc->subArvDir = no_rm->subArvDir;
+            }
+            no_esc->noPai = no_rm->noPai;
+            
             // Quando no_rm for a raiz
             if(no_rm == *raiz)
-            {
-                no_rm->subArvEsq->noPai = no_esc;
-                no_esc->subArvEsq = no_rm->subArvEsq;
-                if(no_esc != no_rm->subArvDir)
-                {
-                    if(no_esc->subArvDir)
-                        no_esc->subArvDir->noPai = no_esc->noPai;
-                    no_esc->noPai->subArvEsq = no_esc->subArvDir;
-                    no_esc->subArvDir = no_rm->subArvDir;
-                    no_rm->subArvDir->noPai = no_esc;
-                }
-                no_esc->noPai = no_rm->noPai;
                 *raiz = no_esc;
-                delete no_rm;
-            }   
             else
-            {
                 if(no_rm->Valor < no_rm->noPai->Valor)
                     no_rm->noPai->subArvEsq = no_esc;
                 else
                     no_rm->noPai->subArvDir = no_esc;
-                no_rm->subArvEsq->noPai = no_esc;
-                no_esc->subArvEsq = no_rm->subArvEsq;
-
-                // Quando o nó mais a esquerda não é filho de no_rm
-                if(no_esc != no_rm->subArvDir)
-                {
-                    if(no_esc->subArvDir)
-                        no_esc->subArvDir->noPai = no_esc->noPai;
-                    no_esc->noPai->subArvEsq = no_esc->subArvDir;
-                    no_rm->subArvDir->noPai = no_esc;
-                    no_esc->subArvDir = no_rm->subArvDir;
-                }
-                no_esc->noPai = no_rm->noPai;
-                delete no_rm;
-            }
+            delete no_rm;
+            return;
         }
     }
 }
