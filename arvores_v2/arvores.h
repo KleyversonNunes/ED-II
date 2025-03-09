@@ -2,9 +2,15 @@ typedef struct TipoNo *TipoApontador;
 
 typedef struct TipoNo
 {
-    int Valor;
+    int Valor, altura, FB;
     TipoApontador subArvEsq, subArvDir, noPai;
 }TipoNo;
+
+int altura(TipoApontador);
+
+void atualizarAltura(TipoApontador);
+
+void fatorBalanceamento(TipoApontador);
 
 TipoApontador criarNo(int);
 

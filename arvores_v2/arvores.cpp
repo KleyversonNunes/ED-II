@@ -1,5 +1,6 @@
 #include "arvores.h"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -7,10 +8,29 @@ TipoApontador criarNo(int no)
 {
     TipoApontador novo = new TipoNo;
     novo->Valor = no;
+    novo->altura = 0;
+    novo->FB = 0;
     novo->subArvEsq = nullptr;
     novo->subArvDir = nullptr;
     novo->noPai = nullptr;
     return novo;
+}
+
+int altura(TipoApontador no)
+{
+    return (no == nullptr) ? -1 : no->altura;
+}
+
+void atualizarAltura(TipoApontador no)
+{
+    if(no != nullptr)
+        no->altura = 1 + max(altura(no->subArvEsq),altura(no->subArvDir));
+}
+
+void fatorBalanceamento(TipoApontador no)
+{
+    if(no == nullptr) no->FB = 0;
+    no->FB = altura(no->subArvEsq)-altura(no->subArvDir);
 }
 
 TipoApontador buscarNo(TipoApontador raiz, int no)
@@ -141,7 +161,7 @@ void pre_ordem(TipoApontador raiz)
 {
     if(raiz != nullptr)
     {
-        cout << raiz->Valor << " ";
+        cout << raiz->Valor << " (" << "Alt = " << raiz->altura << " FB = " << raiz->FB << ")" << endl;
         pre_ordem(raiz->subArvEsq);
         pre_ordem(raiz->subArvDir);
     }

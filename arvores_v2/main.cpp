@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-    TipoApontador raiz;
+    TipoApontador raiz, Aux;
     //vector<int> lista = {10,15,13,8,9,6,5,11,12,18,3,16,20,23,17};
     vector<int> lista = {10,15,13,14,11,12,8,9,6,5,18,16,17,3,20,23};
     //vector<int> lista = {10,15,12,14,11,13,8,9,6,5,18,16,17,3,20,23};
@@ -21,7 +21,16 @@ int main()
             inserirNo(raiz);
         }
         else
+        {
             inserirNo(criarNo(lista[i]),raiz);
+            Aux = buscarNo(raiz,lista[i])->noPai;
+            while(Aux != nullptr)
+            {
+                atualizarAltura(Aux);
+                fatorBalanceamento(Aux);
+                Aux = Aux->noPai;
+            }
+        }
     }
 
     // Imprimindo a arvore
@@ -61,11 +70,11 @@ int main()
     cout << endl;
     */
 
-    removerNo(&raiz,8);
+    //removerNo(&raiz,8);
     //cout << "Removendo a raiz: ";
-    cout << "Removendo o 8: ";
-    pre_ordem(raiz);
-    cout << endl;
+    //cout << "Removendo o 8: ";
+    //pre_ordem(raiz);
+    //cout << endl;
 
     /*
     removerNo(&raiz,18);
