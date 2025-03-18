@@ -16,9 +16,17 @@ TipoApontador criarNo(int);
 
 TipoApontador buscarNo(TipoApontador,int);
 
-void inserirNo(TipoApontador,TipoApontador = nullptr);
+void inserirNo(TipoApontador,TipoApontador);
 
 void removerNo(TipoApontador *,int);
+
+void rotacaoSimplesDir(TipoApontador *,TipoApontador);
+
+void rotacaoSimplesEsq(TipoApontador *,TipoApontador);
+
+void rotacaoDuplaDir(TipoApontador *,TipoApontador);
+
+void rotacaoDuplaEsq(TipoApontador *,TipoApontador);
 
 // Métodos de percurso
 void pre_ordem(TipoApontador);

@@ -156,12 +156,66 @@ void removerNo(TipoApontador *raiz,int no)
     }
 }
 
+void rotacaoSimplesDir(TipoApontador *raiz,TipoApontador no)
+{
+    // Se nó ou filho for nullptr, a funcao é encerrada
+    if(!no || !no->subArvEsq) return;
+    TipoApontador pai = no->noPai;
+    TipoApontador filho = no->subArvEsq;
+    filho->noPai = pai;
+    no->noPai = filho;
+    no->subArvEsq = filho->subArvDir;
+    if(filho->subArvDir)
+        filho->subArvDir->noPai = no;
+    filho->subArvDir = no;
+    if(pai)
+        if(pai->subArvEsq == no)
+            pai->subArvEsq = filho;
+        else
+            pai->subArvDir = filho;
+    else
+        (*raiz) = filho;
+}
+
+void rotacaoSimplesEsq(TipoApontador *raiz,TipoApontador no)
+{
+    // Se nó ou filho for nullptr, a funcao é encerrada
+    if(!no || !no->subArvDir) return;
+    TipoApontador filho = no->subArvDir;
+    TipoApontador pai = no->noPai;
+    filho->noPai = pai;
+    no->noPai = filho;
+    no->subArvDir = filho->subArvEsq;
+    if(filho->subArvEsq)
+        filho->subArvEsq->noPai = no;
+    filho->subArvEsq = no;
+    if(pai)
+        if(pai->subArvDir == no)
+            pai->subArvDir = filho;
+        else
+            pai->subArvEsq = filho;
+    else
+        (*raiz) = filho;
+}
+
+void rotacaoDuplaDir(TipoApontador *raiz,TipoApontador no)
+{
+    rotacaoSimplesEsq(raiz,no->subArvEsq);
+    rotacaoSimplesDir(raiz,no);
+}
+
+void rotacaoDuplaEsq(TipoApontador *raiz,TipoApontador no)
+{
+    rotacaoSimplesDir(raiz,no->subArvDir);
+    rotacaoSimplesEsq(raiz,no);
+}
+
 // Implementação dos percursos
 void pre_ordem(TipoApontador raiz)
 {
     if(raiz != nullptr)
     {
-        cout << raiz->Valor << " (" << "Alt = " << raiz->altura << " FB = " << raiz->FB << ")" << endl;
+        cout << raiz->Valor << " ";
         pre_ordem(raiz->subArvEsq);
         pre_ordem(raiz->subArvDir);
     }

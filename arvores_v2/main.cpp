@@ -9,7 +9,7 @@ int main()
 {
     TipoApontador raiz, Aux;
     //vector<int> lista = {10,15,13,8,9,6,5,11,12,18,3,16,20,23,17};
-    vector<int> lista = {10,15,13,14,11,12,8,9,6,5,18,16,17,3,20,23};
+    vector<int> lista = {10,15,13,14,11};//,12,8,9,6,5,18,16,17,3,20,23};
     //vector<int> lista = {10,15,12,14,11,13,8,9,6,5,18,16,17,3,20,23};
     //vector<int> lista = {10,7,4,8,15,12,18};
 
@@ -18,7 +18,7 @@ int main()
         if(i == 0)
         {
             raiz = criarNo(lista[i]);
-            inserirNo(raiz);
+            inserirNo(raiz,nullptr);
         }
         else
         {
@@ -28,18 +28,26 @@ int main()
             {
                 atualizarAltura(Aux);
                 fatorBalanceamento(Aux);
+                if(Aux->FB > 1 && Aux->subArvEsq->FB >= 0)
+                    rotacaoSimplesDir(&raiz,Aux);
+                else if(Aux->FB < -1 && Aux->subArvDir->FB <= 0)
+                    rotacaoSimplesEsq(&raiz,Aux);
+                else if(Aux->FB > 1 && Aux->subArvEsq->FB < 0)
+                    rotacaoDuplaDir(&raiz,Aux);
+                else if(Aux->FB < -1 && Aux->subArvDir->FB > 0)
+                    rotacaoDuplaEsq(&raiz,Aux);
                 Aux = Aux->noPai;
             }
         }
     }
 
+    cout << endl;
     // Imprimindo a arvore
-    cout << "Inicio: ";
     pre_ordem(raiz);
     cout << endl;
 
     /*
-    inserirNo(criarNo(22),raiz);
+    inserirNo(criarNo(22),raiz); 
     cout << "Inserindo o 22: ";
     pre_ordem(raiz);
     cout << endl;
